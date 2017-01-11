@@ -1,10 +1,186 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <title>Visual Admin Dashboard - Home</title>
+    <meta name="description" content="">
+    <meta name="author" content="templatemo">
+    
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400,300,400italic,700' rel='stylesheet' type='text/css'>
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/templatemo-style.css" rel="stylesheet">
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-<form method = 'post'>
-{%csrf_token%}
-<center> {{ form }} </center>
-<center> <li> </li> </center>
-<center> <li> </li> </center>
-<center> <li> </li> </center>
-<center> <input type = "submit" value = "提交"> </center>
-</form>
+  </head>
+  <body>  
+    <!-- Left column -->
+    <div class="templatemo-flex-row">
+      <div class="templatemo-sidebar">
+        <header class="templatemo-site-header">
+          <div class="square"></div>
+          <h1>Driver Yu</h1>
+        </header>
+        <div class="profile-photo-container">
+          <img src="images/yukai.jpg" alt="Profile Photo" class="img-circle img-thumbnail">  
+          <div class="profile-photo-overlay"></div>
+        </div>      
+        <!-- Search box -->
+        <div class="mobile-menu-icon">
+            <i class="fa fa-bars"></i>
+        </div>
+        <nav class="templatemo-left-nav">          
+          <ul>
+			<li><a href="index.html"><i class="fa fa-users fa-fw"></i>主页</a></li>
+            <li><a href="Total.html"><i class="fa fa-users fa-fw"></i>分时段总体网络质量</a></li>
+            <li><a href="Railway.html"><i class="fa fa-bar-chart fa-fw"></i>分时段铁道网络质量</a></li>
+            <li><a href="CellTable.html"><i class="fa fa-database fa-fw"></i>小区网络报表</a></li>
+            <li><a href="ColorMap.html"><i class="fa fa-map-marker fa-fw"></i>地图</a></li>
+            <li><a href="login.html"><i class="fa fa-eject fa-fw"></i>退出</a></li>
+          </ul>  
+        </nav>
+      </div>
+      <!-- Main content --> 
+      <div class="templatemo-content col-1 light-gray-bg">
+        <div class="templatemo-top-nav-container">
+          <div class="row">
+            <nav class="templatemo-top-nav col-lg-12 col-md-12">
+              <ul class="text-uppercase">
+                <li><a href="Newschool.html" class="active">新校区网络报表</a></li>
+                <li><a href="bb.html">校本部网络报表</a></li>
+                <li><a href="sh.html">升华公寓网络报表</a></li>
+				<li><a href="Rw.html">铁道学院网络报表</a></li>
+              </ul>  
+            </nav> 
+          </div>
+        </div>
+        <div class="templatemo-content-container">
+          <div class="templatemo-flex-row flex-content-row">
+            <div class="templatemo-content-widget white-bg col-2">
+              <i class="fa fa-times"></i>
+              <div class="square"></div>
+              <h2 class="templatemo-inline-block">简介</h2><hr>
+			  <p>目前，湖南境内高铁覆盖率已到达70%，全省14个地市中已有10个开通高铁，高铁已成为人们出行的主要选择，高铁网络质量以成为湖南移动网络质量的重要窗口</p> 
+              <p>通过大数据分析将用户、小区、路线、方向、时间、场景维度汇聚成一个整体，基于高铁用户身份识别，场景质量透视、指标监控、异常事件定位分析，快速、准确评估场景网络质量并提升高铁用户业务感知。</p>             
+            </div>
+			<!--
+            <div class="templatemo-content-widget white-bg col-1 text-center">
+              <i class="fa fa-times"></i>
+              <h2 class="text-uppercase"></h2>
+              <h3 class="text-uppercase margin-bottom-10"></h3>
+              <img src="images/yukai.jpg" alt="Bicycle" class="img-circle img-thumbnail">
+            </div>
+			-->
+			<!--
+            <div class="templatemo-content-widget white-bg col-1">
+              <i class="fa fa-times"></i>
+              <h2 class="text-uppercase">Dictum</h2>
+              <h3 class="text-uppercase">Sedvel Erat Non</h3><hr>
+              <div class="progress">
+                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+              </div>
+              <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"></div>
+              </div>
+              <div class="progress">
+                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+              </div>                          
+            </div>
+			-->
+          </div>
+           <!-- Second row ends -->
+          <div class="templatemo-flex-row flex-content-row templatemo-overflow-hidden"> <!-- overflow hidden for iPad mini landscape view-->
+            <div class="col-1 templatemo-overflow-hidden">
+              <div class="templatemo-content-widget white-bg templatemo-overflow-hidden">
+                <i class="fa fa-times"></i>
+                <div class="templatemo-flex-row flex-content-row">
+                  <div class="col-1 col-lg-6 col-md-12">
+                    <h2 class="text-center"><span class="badge"></span></h2>
+					<img src="../static/24hStream.png" alt="24h" width="941px" height="737px">
+                    <div id="pie_chart_div" class="templatemo-chart"></div> <!-- Pie chart div -->
+                  </div>
+                  <div class="col-1 col-lg-6 col-md-12">
+                    <h2 class="text-center"><span class="badge"></span></h2>
+                    <div id="bar_chart_div" class="templatemo-chart"></div> <!-- Bar chart div -->
+                  </div>  
+                </div>                
+              </div>
+            </div>
+          </div>        
+        </div>
+      </div>
+    </div>
+    
+    <!-- JS -->
+    <script src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
+    <script src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->
+    <script src="https://www.google.com/jsapi"></script> <!-- Google Chart -->
+    <script>
+      /* Google Chart 
+      -------------------------------------------------------------------*/
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart); 
+      
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+          // Create the data table.
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Topping');
+          data.addColumn('number', 'Slices');
+          data.addRows([
+            ['Mushrooms', 3],
+            ['Onions', 1],
+            ['Olives', 1],
+            ['Zucchini', 1],
+            ['Pepperoni', 2]
+          ]);
+
+          // Set chart options
+          var options = {'title':'How Much Pizza I Ate Last Night'};
+
+          // Instantiate and draw our chart, passing in some options.
+          var pieChart = new google.visualization.PieChart(document.getElementById('pie_chart_div'));
+          pieChart.draw(data, options);
+
+          var barChart = new google.visualization.BarChart(document.getElementById('bar_chart_div'));
+          barChart.draw(data, options);
+      }
+
+      $(document).ready(function(){
+        if($.browser.mozilla) {
+          //refresh page on browser resize
+          // http://www.sitepoint.com/jquery-refresh-page-browser-resize/
+          $(window).bind('resize', function(e)
+          {
+            if (window.RT) clearTimeout(window.RT);
+            window.RT = setTimeout(function()
+            {
+              this.location.reload(false); /* false to get page from cache */
+            }, 200);
+          });      
+        } else {
+          $(window).resize(function(){
+            drawChart();
+          });  
+        }   
+      });
+      
+    </script>
+    <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
+
+  </body>
+</html>
