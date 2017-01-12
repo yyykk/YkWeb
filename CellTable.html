@@ -17,6 +17,71 @@
   </head>
   <body>  
     <!-- Left column -->
+		<div class="templatemo-content-container">
+          <div class="templatemo-content-widget no-padding">
+            <div class="panel panel-default table-responsive">
+              <table id = "FindTable" class="table table-striped table-bordered templatemo-user-table">
+                <thead>
+                  <tr>
+                    <td><a href="" class="white-text templatemo-sort-by">小区名 <span class="caret"></span></a></td>
+                    <td><a href="" class="white-text templatemo-sort-by">流量 <span class="caret"></span></a></td>
+                    <td><a href="" class="white-text templatemo-sort-by">Tcp重连 <span class="caret"></span></a></td>
+                    <td><a href="" class="white-text templatemo-sort-by">Tcp质量 <span class="caret"></span></a></td>
+                    <td><a href="" class="white-text templatemo-sort-by">Tcp延迟 <span class="caret"></span></a></td>
+					<td><a href="" class="white-text templatemo-sort-by">Http延迟 <span class="caret"></span></a></td>
+                  </tr>
+                </thead>
+				<tr><td class='onecenter'></td><td class='onecenter'></td><td class='onecenter'></td><td class='onecenter'></td><td class='onecenter'></td><td class='onecenter'></td></tr>
+				</table>
+			</div>
+		</div>
+		<div class="row form-group">
+			<font color = "ffffff">
+                <div class="col-lg-6 col-md-6 form-group">                  
+                    <label for="inputFirstName">小区名</label>
+                    <input type="text" class="form-control" id="cell" >                  
+                </div>
+                <div class="col-lg-6 col-md-6 form-group">                  
+                    <label for="inputLastName">流量</label>
+                    <input type="text" class="form-control" id="stream" >                  
+                </div> 
+              </div>
+              <div class="row form-group">
+                <div class="col-lg-6 col-md-6 form-group">                  
+                    <label for="inputUsername">Tcp重连</label>
+                    <input type="text" class="form-control" id="TcpTimes" >                  
+                </div>
+                <div class="col-lg-6 col-md-6 form-group">                  
+                    <label for="inputEmail">Tcp质量</label>
+                    <input type="text" class="form-control" id="TcpQos" >                  
+                </div> 
+              </div>
+              <div class="row form-group">
+                <div class="col-lg-6 col-md-6 form-group">                  
+                    <label for="inputNewPassword">Tcp延迟</label>
+                    <input type="text" class="form-control" id="TcpDelay">
+                </div>
+                <div class="col-lg-6 col-md-6 form-group">                  
+                    <label for="inputConfirmNewPassword">Http延迟</label>
+                    <input type="text" class="form-control" id="HttpDelay">
+                </div> 
+              </div>
+			  </font>
+			  <div class="form-group">
+				<input type="button" class="templatemo-blue-button width-100" onclick="insRow()" value="插入数据">
+			  </div>
+			  <div class="form-group">
+				<input type="button" class="templatemo-blue-button width-100" onclick="TableFind()" value="查找数据">
+			</div>
+			<div class="form-group">
+				<input type="button" class="templatemo-blue-button width-100" onclick="TableDelete()" value="删除数据">
+			</div>
+			<div class="form-group">
+				<input type="button" class="templatemo-blue-button width-100" onclick="TableModify()" value="修改数据">
+			</div>
+            </div>                          
+          </div>
+		
         <div class="templatemo-content-container">
           <div class="templatemo-content-widget no-padding">
             <div class="panel panel-default table-responsive">
@@ -79,57 +144,82 @@
 				</td></tr>
                 <tbody>
 				
-				<!--
-                  <tr>
-                    <td>1.</td>
-                    <td>John</td>
-                    <td>Smith</td>
-                    <td>@jS</td>
-                    <td>js@company.com</td>
-                    <td><a href="" class="templatemo-edit-btn">Edit</a></td>
-                    <td><a href="" class="templatemo-link">Action</a></td>
-                    <td><a href="" class="templatemo-link">Delete</a></td>
-                  </tr>
-                  <tr>
-                    <td>2.</td>
-                    <td>Bill</td>
-                    <td>Jones</td>
-                    <td>@bJ</td>
-                    <td>bj@company.com</td>
-                    <td><a href="" class="templatemo-edit-btn">Edit</a></td>
-                    <td><a href="" class="templatemo-link">Action</a></td>
-                    <td><a href="" class="templatemo-link">Delete</a></td>
-                  </tr>
-                  <tr>
-                    <td>3.</td>
-                    <td>Mary</td>
-                    <td>James</td>
-                    <td>@mJ</td>
-                    <td>mj@company.com</td>
-                    <td><a href="" class="templatemo-edit-btn">Edit</a></td>
-                    <td><a href="" class="templatemo-link">Action</a></td>
-                    <td><a href="" class="templatemo-link">Delete</a></td>
-                  </tr>
-				  -->
+				
                                      
                 </tbody>
               </table>
-
-			  <div class="form-group">
-					<input type="button" class="templatemo-blue-button width-100" onclick="insRow()" value="插入数据"></button>
-			  </div>
-            </div>                          
-          </div>          
-
-    
+			            
+		
+			
     <!-- JS -->
     <script>
+	  function TableFind(){
+		var Ftab = document.getElementById('FindTable');
+		var tab = document.getElementById('myTable');
+		var temp = document.getElementById('cell').value;
+		console.log(temp);
+		//console.log(tab.rows[i].cells[0].innerHTML);
+		for(i = 0; i < tab.rows.length; i++){
+			//console.log(tab.rows[i].cells[0].innerHTML);
+			if (temp == tab.rows[i].cells[0].innerHTML){
+				if (Ftab.rows.length > 1){
+					Ftab.deleteRow(1);
+				}
+				var x = Ftab.insertRow(Ftab.rows.length);
+				for (j = 0; j < 6; j++){	
+					var y = x.insertCell(j);
+					y.innerHTML = tab.rows[i].cells[j].innerHTML;
+					console.log(tab.rows[i].cells[j].innerHTML);
+				}
+				return 1;
+			}
+		}
+		alert("未找到该小区")
+	  }
+	  function TableDelete(){
+		var tab = document.getElementById('myTable');
+		var temp = document.getElementById('cell').value;
+		for(i = 0; i < tab.rows.length; i++){
+			if (temp == tab.rows[i].cells[0].innerHTML){
+				var x = tab.deleteRow(i);
+				for (j = 0; j < 6; j++){	
+					var y = x.insertCell(j);
+					y.innerHTML = "";
+				}
+				return 1;
+			}
+		}
+		alert("未找到该小区");
+	  }
+	  function TableModify(){
+		var tab = document.getElementById('myTable');
+		var temp = document.getElementById('cell').value;
+		for(i = 0; i < tab.rows.length; i++){
+			if (temp == tab.rows[i].cells[0].innerHTML){
+				tab.deleteRow(i);
+				var x= tab.insertRow(i);
+				for (i = 0; i < tab.rows.item(0).cells.length; i++){	
+					var y = x.insertCell(i);
+					y.innerHTML = document.getElementById(TextName[i]).value;
+				}
+				return 1;
+			}
+		}
+		alert("未找到该小区");
+	  }
+	  var TextName = new Array("cell", "stream", "TcpTimes", "TcpQos", "TcpDelay", "HttpDelay");
 	  function insRow(){
 		var tab = document.getElementById('myTable');
-		var x= tab.insertRow(tab.rows.length);
+		for(i = 0; i < tab.rows.length; i++){
+			if (document.getElementById(TextName[0]).value == tab.rows[i].cells[0].innerHTML){
+				alert("该小区名已存在");
+				return 1;
+			}
+		}
+		var x= tab.insertRow(1);
 		for (i = 0; i < tab.rows.item(0).cells.length; i++){	
 			var y = x.insertCell(i);
-			y.innerHTML = "new";
+			y.innerHTML = document.getElementById(TextName[i]).value;
 		}
 	}
     </script>
