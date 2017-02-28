@@ -1,0 +1,25 @@
+﻿<html>
+<title>
+    0626
+</title>
+<body>
+<h1> <center> <font size = 8> <b> 各小区网络质量 </b> </font> </center> </h1>
+<center>
+<input type="button" onclick="insRow()"value="插入数据">
+<font size = 3>
+<table id = "myTable" border='1'cellspacing=0 cellpadding=3 >
+</table>
+<p id = "main"> </p>
+</font>
+</center>
+</body>
+
+<script type="text/javascript">
+function insRow(){
+    var fso=new ActiveXObject(Scripting.FileSystemObject); 
+	var f=fso.opentextfile("./CellQos.csv", 1, false);
+	var s = f.ReadLine();
+	document.getElementById("main").innerHTML=s; 
+};
+
+</script>
