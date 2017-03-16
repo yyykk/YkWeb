@@ -1,0 +1,220 @@
+﻿<!-- index.html -->
+
+
+<!--
+<html> 
+  <head> 
+        <meta charset="utf-8"> 
+        <title>HelloWorld</title> 
+  </head> 
+    <body>
+		<center>
+		<meta charset="utf-8">
+        <b><h1>铁道学院</h1></b>
+		<pre id="file"></pre>
+		<p></p>
+		<input id = "next" type="button" value="下一时刻" onclick="create_button()" />
+		<p></p>
+		<p> 当前时间 </p>
+		<p id = "time"></p>
+		<input type="range" id="slider" min="1.0" max="2.0" step="0.01" value="1.0" style="display: block;margin: 20px auto;width: 800px;"/>
+		<canvas id="myCanvas" style="display: block;margin: 0 auto;border: 1px solid #aaa;">
+		Your browser does not support the HTML5 canvas tag.
+		</canvas>
+		</center>
+		
+		
+        <script>
+		var RailQos = new Array(10,8,5,3,2,4,4,6,8,6,5,7,5,7,8,5,8,9,7,8,6,5,8,5);
+		var CSUQos = new Array(8,5,2,2,3,4,5,3,6,7,4,9,7,10,2,3,4,6,4,8,7,6,8,7);
+		var PositionX = new Array(300,350,400);
+		var PositionY = new Array(300,350,400);
+		var Canvas = document.getElementById("myCanvas"); 
+		var map = new Image();
+		var cxt=Canvas.getContext("2d");
+		var slider = document.getElementById("slider");
+		var StartTime = 1466870529255;
+		window.onload=function(){
+			Canvas.width = 1033;
+			Canvas.height = 649;
+			
+			map.src="../static/images/Subway.png";
+			map.onload = function () {
+				drawImageByScale(slider.value);  
+  
+                slider.onmousemove = function(){  
+                    drawImageByScale(slider.value);  
+                };
+			};
+			function drawImageByScale(scale){
+                //根据图片的缩放比例调整图片的长宽  
+                var imageWidth = Canvas.width * scale;   
+                var imageHeight = Canvas.height * scale;  
+  
+                //画布上的起始点：画布的大小一半减去图像大小的一半。可以为负数，表示在左上角的外面。  
+                var dx = Canvas.width/2 - imageWidth/2;  
+                var dy = Canvas.height/2 - imageHeight/2;  
+  
+                 //清空画布  
+                cxt.clearRect(0, 0, Canvas.width, Canvas.height);  
+  
+                //把image画到canvas中，dx、dy表示起始点坐标  
+                cxt.drawImage(map, dx, dy, imageWidth, imageHeight);
+			}
+		};
+		var counter = 0;var time = 1466870400000;var color = 0;
+		function create_button(){
+			counter += 1;
+			cxt.drawImage(map,0,0);
+			if (counter > 24){
+				counter = 0;
+				time = 1466870400000;
+			}
+			if(RailQos[counter] / 10 > 0.5){
+				var Rs = 'rgba(255,0,0, ' + (RailQos[counter] / 10 - 0.3) + ')';
+			}else{
+				var Rs = 'rgba(0,255,0, ' + (RailQos[counter] / 10) + ')';
+			}
+			if(CSUQos[counter] / 10 > 0.5){
+				var Cs = 'rgba(255,0,0 ' + (RailQos[counter] / 10 - 0.3) + ')';
+			}else{
+				var Cs = 'rgba(0,255,0 ' + (RailQos[counter] / 10) + ')';
+			}
+			for(let x = 0; x < 5; ++x){
+				for(let y = 0; y < 5; ++y){
+					cxt.beginPath();
+					cxt.arc(600 + 40 * x, 200 + 40 * y, 10,0,Math.PI * 2,true);
+					cxt.closePath();
+					cxt.fillStyle = Rs;
+					cxt.fill();
+				}
+			}
+			
+			var newDate = new Date();
+			newDate.setTime(time);
+			document.getElementById("time").innerHTML = newDate.toString();
+			time += 3600000;
+			return newDate.toString();
+		} 
+        </script> 
+    </body> 
+</html>
+
+<!--
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>要使用的图像：</p>
+<img id="tulip" src="../static/map960400.png" alt="The Tulip" />
+
+<p>画布：</p>
+<canvas id="myCanvas" width="500" height="300" style="border:1px solid #d3d3d3;background:#ffffff;">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+<script>
+
+window.onload=function(){
+    var Canvas=document.getElementById("myCanvas");
+    var cxt=Canvas.getContext("2d");
+    var bg=new Image();
+    //先指定一个回调函数，图片加载好之后自然会回来执行
+    bg.onload = function () {
+        cxt.drawImage(bg00);
+    };
+    //加载图片，完成后执行刚才的函数
+    bg.src="../static/map960400.png";
+};
+
+</script>
+
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<center>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=WgBo8u0VqP2OOhi3ND3k8LZPuzRHUV0u"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
+    <title>高校流量显示</title>
+    <style type="text/css">
+		ul,li{list-style: none;margin:0;padding:0;float:left;}
+		html{height:100%}
+		body{height:100%;margin:0px;padding:0px;font-family:"微软雅黑";}
+		#container{height:800px;width:1400px;}
+		#r-result{width:100%;}
+    </style>	
+</head>
+<body>
+	<b><h1>铁道学院</h1></b>
+	<div id="r-result">
+		<input type="button"  onclick="openHeatmap();" value="显示热力图"/>
+		<input type="button"  onclick="closeHeatmap();" value="关闭热力图"/>
+	</div>
+	<div id="container"></div>
+</body>
+</center>
+</html>
+<script type="text/javascript">
+    var map = new BMap.Map("container");          // 创建地图实例
+
+    var point = new BMap.Point(112.964413,28.156442);
+    map.centerAndZoom(point, 15);             // 初始化地图，设置中心点坐标和地图级别
+    map.enableScrollWheelZoom(); // 允许滚轮缩放
+  
+    var points = {{position | safe}};
+   
+    if(!isSupportCanvas()){
+    	alert('热力图目前只支持有canvas支持的浏览器,您所使用的浏览器不能使用热力图功能~')
+    }
+	//详细的参数,可以查看heatmap.js的文档 https://github.com/pa7/heatmap.js/blob/master/README.md
+	//参数说明如下:
+	/* visible 热力图是否显示,默认为true
+     * opacity 热力的透明度,1-100
+     * radius 势力图的每个点的半径大小   
+     * gradient  {JSON} 热力图的渐变区间 . gradient如下所示
+     *	{
+			.2:'rgb(0, 255, 255)',
+			.5:'rgb(0, 110, 255)',
+			.8:'rgb(100, 0, 255)'
+		}
+		其中 key 表示插值的位置, 0~1. 
+		    value 为颜色值. 
+     */
+	heatmapOverlay = new BMapLib.HeatmapOverlay({"radius":20});
+	map.addOverlay(heatmapOverlay);
+	heatmapOverlay.setDataSet({data:points,max:100});
+	//是否显示热力图
+    function openHeatmap(){
+        heatmapOverlay.show();
+    }
+	function closeHeatmap(){
+        heatmapOverlay.hide();
+    }
+	closeHeatmap();
+    function setGradient(){
+     	/*格式如下所示:
+		{
+	  		0:'rgb(102, 255, 0)',
+	 	 	.5:'rgb(255, 170, 0)',
+		  	1:'rgb(255, 0, 0)'
+		}*/
+     	var gradient = {};
+     	var colors = document.querySelectorAll("input[type='color']");
+     	colors = [].slice.call(colors,0);
+     	colors.forEach(function(ele){
+			gradient[ele.getAttribute("data-key")] = ele.value; 
+     	});
+        heatmapOverlay.setOptions({"gradient":gradient});
+    }
+	//判断浏览区是否支持canvas
+    function isSupportCanvas(){
+        var elem = document.createElement('canvas');
+        return !!(elem.getContext && elem.getContext('2d'));
+    }
+</script>

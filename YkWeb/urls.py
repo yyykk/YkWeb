@@ -17,6 +17,7 @@ from django.contrib import admin
 from demo import views
 urlpatterns = [
 	url(r'^$', views.login),
+	url(r'^map.html$', views.Map),
 	url(r'^[A-Za-z]+.html$', views.GetSomething),
     url(r'^admin/', include(admin.site.urls)),
 ]
