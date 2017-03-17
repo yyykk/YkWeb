@@ -14,25 +14,19 @@ def GetSomething(request):
 	return render(request, request.path[1:])
 	
 def Map(request):
-	DataBase = pymysql.connect (host = "localhost", user = "root", passwd = "mysql", db = "demo")
-	CursorDict = DataBase.cursor(pymysql.cursors.DictCursor)
-	Cursor = DataBase.cursor()
-	Cursor.execute('select ECI from tac;')
-	ECI = Cursor.fetchall()
-	position = []
-	for e in ECI:
-		CursorDict.execute(
-	'''
-		select t.lng, t.lat, e.Stream from ecihourstream as e, tac as t 
-		where e.ECI = 
-	'''
-		+ str(e) + 'and e.ECI = t.ECI;')
-		DictTemp = CursorDict.fetall()
-		MaxStream = DictTemp['Stream'].max()
-		for i in range(len(DictTemp['Stream'])):
-			DictTemp['Stream'][i] = DictTemp['Stream'][i] / MaxStream
-		position.append(DictTemp);
-	#cursor.execute('select t.lng, t.lat, e.count from  tac as t, ecicounter as e where t.ECI = e.ECI')
-	#position = cursor.fetchall()
-	return render(request, 'map.html', {'position' : json.dumps(position)})#, {'lat' : lat})
+    DataBase = pymysql.connect (host = "localhost", user = "root", passwd = "mysql", db = "demo", charset='utf8')
+    CursorDict = DataBase.cursor(pymysql.cursors.DictCursor)
+    Cursor = DataBase.cursor()
+    Cursor.execute('select distinct Time from ecihourstream;')
+    Time = Cursor.fetchall()
+    position = []
+    for t in Time:
+        #print("select t.lng, t.lat, e.Stream / m.MStream * 100 as count from ecihourstream as e , MaxStream as m, tac as t where t.ECI = e.ECI and e.ECI = m.ECI and e.Time = '" + str(t)[2:15] + "'")
+        CursorDict.execute("select t.lng, t.lat, e.Stream as count from ecihourstream as e, tac as t where t.ECI = e.ECI and e.Time = '" + str(t)[2:15] + "'")
+        DictTemp = CursorDict.fetchall()
+        #print(DictTemp)
+        position.append(DictTemp)
+    #print(position[6])
+    DataBase.close()
+    return render(request, 'map.html', {'position' : json.dumps(position)})
 	
