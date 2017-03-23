@@ -156,7 +156,7 @@ window.onload=function(){
 		<input type="button"  onclick="openHeatmap();" value="显示热力图"/>
 		<input type="button"  onclick="closeHeatmap();" value="关闭热力图"/>
 	</div>
-	<input type="range" id="slider" min="0.0" max="19.0" step="1.0" value="0" style="display: block;margin: 20px auto;width: 800px;"/>
+	<input type="range" id="slider" min="0.0" max="114.0" step="1.0" value="0" style="display: block;margin: 20px auto;width: 800px;"/>
 	<p id = "time"></p>
 	<div id="container"></div>
 </body>
@@ -192,11 +192,11 @@ window.onload=function(){
 	map.addOverlay(heatmapOverlay);
 	//是否显示热力图
 	function openHeatmap(){
-			heatmapOverlay.setDataSet({data:points[slider.value],max:40000000});
+			heatmapOverlay.setDataSet({data:points[slider.value],max:250000});
 			heatmapOverlay.show();
 	}
 	slider.onmousemove = function(){
-		document.getElementById("time").innerHTML = '2016-06-26 ' + slider.value + ':00'
+		document.getElementById("time").innerHTML = '2016-06-26 ' + parseInt(slider.value / 6) + ':' + parseInt(slider.value % 6) + '0';
         openHeatmap();
     };
 	function closeHeatmap(){
