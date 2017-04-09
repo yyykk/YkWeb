@@ -9,7 +9,7 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=WgBo8u0VqP2OOhi3ND3k8LZPuzRHUV0u"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
-    <title>中南大学流量</title>
+    <title>高速公路基站流量</title>
     <style type="text/css">
 		ul,li{list-style: none;margin:0;padding:0;float:left;}
 		html{height:100%}
@@ -19,22 +19,21 @@
     </style>	
 </head>
 <body>
-	<b><h1>中南大学流量分时显示</h1></b>
+	<b><h1>高速公路基站流量</h1></b>
 	<div id="r-result">
-		<input type="button"  onclick="openHeatmap();" value="显示热力图"/>
+		<input type="button"  onclick="openHeatmap();" value="显示流量图"/>
+		<input type="button"  onclick="openPeopleHeatmap();" value="显示人流图"/>
 		<input type="button"  onclick="closeHeatmap();" value="关闭热力图"/>
 	</div>
-	<input type="range" id="slider" min="0.0" max="114.0" step="1.0" value="0" style="display: block;margin: 20px auto;width: 800px;"/>
-	<p id = "time"></p>
+	<p> </p>
 	<div id="container"></div>
 </body>
 </center>
 </html>
 <script type="text/javascript">
     var map = new BMap.Map("container");          // 创建地图实例
-	var slider = document.getElementById("slider");
-    var point = new BMap.Point(112.964413,28.156442);
-    map.centerAndZoom(point, 15);             // 初始化地图，设置中心点坐标和地图级别
+    var point = new BMap.Point(112.89184, 28.00296);
+    map.centerAndZoom(point, 12);             // 初始化地图，设置中心点坐标和地图级别
     map.enableScrollWheelZoom(); // 允许滚轮缩放
     map.addControl(new BMap.MapTypeControl());          //添加地图类型控件
     var points = {{position | safe}};
@@ -60,13 +59,13 @@
 	map.addOverlay(heatmapOverlay);
 	//是否显示热力图
 	function openHeatmap(){
-			heatmapOverlay.setDataSet({data:points[slider.value],max:4.0});
+			heatmapOverlay.setDataSet({data:points[0], max:1});
 			heatmapOverlay.show();
 	}
-	slider.onmousemove = function(){
-		document.getElementById("time").innerHTML = '2016-06-26 ' + parseInt(slider.value / 6) + ':' + parseInt(slider.value % 6) + '0';
-        openHeatmap();
-    };
+	function openPeopleHeatmap(){
+			heatmapOverlay.setDataSet({data:points[1], max:1});
+			heatmapOverlay.show();
+	}
 	function closeHeatmap(){
         heatmapOverlay.hide();
     }

@@ -30,3 +30,33 @@ def Map(request):
     DataBase.close()
     return render(request, 'map.html', {'position' : json.dumps(position)})
 	
+def MotorwayTAC(request):
+    DataBase = pymysql.connect (host = "localhost", user = "root", passwd = "mysql", db = "demo", charset='utf8')
+    Cursor = DataBase.cursor()
+    Cursor.execute('select distinct lng, lat from motoway;')
+    position = Cursor.fetchall();
+    #print(position[6])
+    DataBase.close()
+    return render(request, 'MotorwayTAC.html', {'position' : json.dumps(position)})
+	
+def MotorwayStream(request):
+	DataBase = pymysql.connect (host = "localhost", user = "root", passwd = "mysql", db = "demo", charset='utf8')
+	CursorDict = DataBase.cursor(pymysql.cursors.DictCursor)
+	position = [];
+	CursorDict.execute("select s.Stream / 6004098604 as count, m.lng, m.lat from MotorEciStream as s, motoway as m where s.ECI = m.ECI;")
+	DictTemp = CursorDict.fetchall()
+	position.append(DictTemp);
+	CursorDict.execute("select (s.amount / 5658) as count, m.lng, m.lat from MotorWayPeople as s, motoway as m where s.ECI = m.ECI;")
+	DictTemp = CursorDict.fetchall()
+	position.append(DictTemp);
+	DataBase.close()
+	return render(request, 'MotorwayStream.html', {'position' : json.dumps(position)})
+	
+	
+	
+	
+	
+	
+	
+	
+	
